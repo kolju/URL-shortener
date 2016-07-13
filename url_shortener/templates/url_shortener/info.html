@@ -1,0 +1,10 @@
+{% block title %}URL info:{% endblock %}
+
+{% block content %}
+<p>
+<a href={{ link.long_url }}>{{ link.clicks_count }}</a>
+<br/>
+<br/>
+Submitted on: {{ link.created|date:"M d, Y" }}
+</p>
+{% endblock %}

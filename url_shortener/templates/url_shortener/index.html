@@ -1,0 +1,21 @@
+{% if form %}
+  <form name="url_form" action="{% url 'index' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Short it!" />
+  </form>
+{% endif %}
+
+
+{% block content %}
+<h2>Most Popular Links</h2>
+{% if top_url %}
+    <ul>
+    {% for link in top_url %}
+        <li><a href={{ link.short }}>{{ link.clicks_count }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No URLs are available.</p>
+{% endif %}
+{% endblock content %}
