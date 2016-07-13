@@ -30,7 +30,6 @@ def overall(request):
 def url_redirect(request, short):
     obj = Link.objects.get(short=short)
     obj.clicks_count = F('clicks_count') + 1
-    # obj.refresh_from_db()
     obj.save()
     return redirect(obj.long_url)
 

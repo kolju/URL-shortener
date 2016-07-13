@@ -12,5 +12,6 @@ class Link(models.Model):
         return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(6))
 
     def save(self, *args, **kwargs):
-        self.short = self.create_short_url()
+        if not self.short:
+            self.short = self.create_short_url()
         super(Link, self).save(*args, **kwargs)
