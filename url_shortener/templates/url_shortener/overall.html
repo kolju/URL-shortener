@@ -1,17 +1,37 @@
+{#{% block content %}#}
+{#<h2>URL's list:</h2>#}
+{#{% if objects_list %}#}
+{#    <ul>#}
+{#    {% for obj in objects_list %}#}
+{#        <li><a href={{ obj.long_url }}>{{ obj.short }}</a> : {{ obj.clicks_count }} <a href="{% url 'delete_obj' link_id=obj.id%}">Delete</a></li>#}
+{#    {% endfor %}#}
+{#    </ul>#}
+{#{% else %}#}
+{#    <p>No URLs are available.</p>#}
+{#{% endif %}#}
+{#{% endblock content %}#}
+
 {% block content %}
 <h2>URL's list:</h2>
-{% if objects_list %}
-    <ul>
-    {% for obj in objects_list %}
-        <li><a href={{ obj.long_url }}>{{ obj.short }}</a> : {{ obj.clicks_count }} <a href="{% url 'delete_obj' link_id=obj.id%}">Delete</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No URLs are available.</p>
-{% endif %}
+{% for link in links %}
+    {# Each "link" is a Link model object. #}
+{#    {{ link.long_url }}<br />#}
+     <li><a href={{ link.long_url }}>{{ link.short }}</a> : {{ link.clicks_count }}</li>
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if links.has_previous %}
+            <a href="?page={{ links.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ links.number }} of {{ links.paginator.num_pages }}.
+        </span>
+
+        {% if links.has_next %}
+            <a href="?page={{ links.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock content %}
-
-
-{#{% for note in all_notes %}#}
-{#   <li>{{ note.title }} - <a href="{% url 'delete_note' pk=note.pk %}">Delete</a></li>#}
-{#{% endfor %}#}
