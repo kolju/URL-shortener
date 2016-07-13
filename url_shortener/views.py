@@ -8,9 +8,8 @@ def index(request):
         form = LinkShortenerForm(request.POST)
         if form.is_valid():
             url = {'long_url': form.cleaned_data['url']}
-            # url = form.cleaned_data['url']
             link = Link.objects.create(**url)
-            return redirect('info')
+            return redirect('info/%s' % str(link.id))
     else:
         form = LinkShortenerForm()
         top_url = Link.objects.all().order_by('-clicks_count')[:20]
@@ -18,5 +17,6 @@ def index(request):
 
 
 def info(request, link_id):
-    return render(request, 'url_shortener/info.html', {'link': link_id})
+    url = Link.objects.get(id=link_id)
+    return render(request, 'url_shortener/info.html', {'url': url})
 
