@@ -4,7 +4,6 @@
     <li><a href={{ link.short }}>{{ link.short }}</a> : {{ link.clicks_count }}
     <form name="delete_form" action="{% url 'delete_obj' link_id=link.id%}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
     <input type="submit" value="Delete" />
   </form></li>
 {% endfor %}

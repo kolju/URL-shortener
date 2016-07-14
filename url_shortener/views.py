@@ -11,7 +11,7 @@ def index(request):
         if form.is_valid():
             url = {'long_url': form.cleaned_data['url']}
             link = Link.objects.create(**url)
-            return redirect('info/%s' % str(link.id))
+            return redirect('info', link_id=link.id)
     else:
         form = LinkShortenerForm()
         top_url = Link.objects.all().order_by('-clicks_count', '-created')[:20]
@@ -34,8 +34,8 @@ def url_redirect(request, short):
 def delete_obj(request, link_id):
     if request.method == 'POST':
         Link.objects.filter(id=link_id).delete()
-    return redirect('/shortener/overall/')
-
+    # return redirect(request, 'url_shortener/overall.html')
+    return redirect('/shortener/overall') #TODO: fix it
 
 def overall(request):
     link_list = Link.objects.all().order_by('-clicks_count', '-created')
