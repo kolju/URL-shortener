@@ -1,7 +1,7 @@
 {% block content %}
 <h2>URL's list:</h2>
 {% for link in links %}
-    <li><a href={{ link.short }}>{{ link.short }}</a> : {{ link.clicks_count }}
+    <li><a href={{ link.short_url }}>{{ link.short_url }}</a> : {{ link.clicks_count }}
     <form name="delete_form" action="{% url 'delete_obj' link_id=link.id%}" method="post">
     {% csrf_token %}
     <input type="submit" value="Delete" />

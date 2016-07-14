@@ -23,9 +23,8 @@ def info(request, link_id):
     return render(request, 'url_shortener/info.html', {'url': url})
 
 
-
-def url_redirect(request, short):
-    obj = Link.objects.get(short=short)
+def url_redirect(request, short_url):
+    obj = Link.objects.get(short_url=short_url)
     obj.clicks_count = F('clicks_count') + 1
     obj.save()
     return redirect(obj.long_url)
@@ -36,6 +35,7 @@ def delete_obj(request, link_id):
         Link.objects.filter(id=link_id).delete()
     # return redirect(request, 'url_shortener/overall.html')
     return redirect('/shortener/overall') #TODO: fix it
+
 
 def overall(request):
     link_list = Link.objects.all().order_by('-clicks_count', '-created')

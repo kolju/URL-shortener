@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^overall/$', views.overall, name='overall'),
     url(r'^info/(?P<link_id>[0-9]+)/$', views.info, name='info'),
     url(r'^$', views.index, name='index'),
-    url(r'(?P<short>[0-9A-Za-z]+)/$', views.url_redirect, name='url_redirect')
+    url(r'(?P<short_url>[0-9A-Za-z]+)/$', views.url_redirect, name='url_redirect')
 ]

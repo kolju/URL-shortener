@@ -12,7 +12,7 @@
 {% if top_url %}
     <ul>
     {% for link in top_url %}
-        <li><a href={{ link.long_url }}>{{ link.short }}</a> : {{ link.clicks_count }}</li>
+        <li><a href={{ link.long_url }}>{{ link.short_url }}</a> : {{ link.clicks_count }}</li>
     {% endfor %}
     </ul>
 {% else %}
