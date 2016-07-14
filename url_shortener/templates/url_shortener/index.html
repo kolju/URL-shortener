@@ -9,10 +9,10 @@
 
 {% block content %}
 <h2>Most Popular Links</h2>
-{% if top_url %}
+{% if top_links %}
     <ul>
-    {% for link in top_url %}
-        <li><a href={{ link.long_url }}>{{ link.short_url }}</a> : {{ link.clicks_count }}</li>
+    {% for link in top_links %}
+        <li><a href={{ link.short_url }}>{{ link.short_url }}</a> : {{ link.clicks_count }}</li>
     {% endfor %}
     </ul>
 {% else %}

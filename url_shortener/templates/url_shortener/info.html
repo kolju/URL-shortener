@@ -2,12 +2,12 @@
 
 {% block content %}
 <p>
-<b>Original URL:</b> <a href={{ url.long_url }}>{{ url.long_url }}</a><br/>
+<b>Original URL:</b> <a href={{ link.long_url }}>{{ link.long_url }}</a><br/>
     <br/>
-<b>Short URL:</b> <a href={{ url.short_url }}>{{ url.short_url }}</a><br/>
+<b>Short URL:</b> <a href={{ link.short_url }}>{{ link.short_url }}</a><br/>
     <br/>
-<b>Clicks count:</b> {{ url.clicks_count }}<br/>
+<b>Clicks count:</b> {{ link.clicks_count }}<br/>
     <br/>
-<b>Submitted on:</b> {{ url.created|date:"M d, Y" }}
+<b>Submitted on:</b> {{ link.created|date:"M d, Y" }}
 </p>
 {% endblock %}

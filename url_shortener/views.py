@@ -9,25 +9,25 @@ def index(request):
     if request.method == 'POST':
         form = LinkShortenerForm(request.POST)
         if form.is_valid():
-            url = {'long_url': form.cleaned_data['url']}
-            link = Link.objects.create(**url)
+            long_url = {'long_url': form.cleaned_data['url']}
+            link = Link.objects.create(**long_url)
             return redirect('info', link_id=link.id)
     else:
         form = LinkShortenerForm()
-        top_url = Link.objects.all().order_by('-clicks_count', '-created')[:20]
-    return render(request, 'url_shortener/index.html', {'form': form, 'top_url': top_url})
+        top_links = Link.objects.all().order_by('-clicks_count', '-created')[:20]
+    return render(request, 'url_shortener/index.html', {'form': form, 'top_links': top_links})
 
 
 def info(request, link_id):
-    url = Link.objects.get(id=link_id)
-    return render(request, 'url_shortener/info.html', {'url': url})
+    link = Link.objects.get(id=link_id)
+    return render(request, 'url_shortener/info.html', {'link': link})
 
 
 def url_redirect(request, short_url):
-    obj = Link.objects.get(short_url=short_url)
-    obj.clicks_count = F('clicks_count') + 1
-    obj.save()
-    return redirect(obj.long_url)
+    link = Link.objects.get(short_url=short_url)
+    link.clicks_count = F('clicks_count') + 1
+    link.save()
+    return redirect(link.long_url)
 
 
 def delete_obj(request, link_id):
