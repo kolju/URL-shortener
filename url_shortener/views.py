@@ -23,6 +23,7 @@ def info(request, link_id):
     return render(request, 'url_shortener/info.html', {'url': url})
 
 
+
 def url_redirect(request, short):
     obj = Link.objects.get(short=short)
     obj.clicks_count = F('clicks_count') + 1
