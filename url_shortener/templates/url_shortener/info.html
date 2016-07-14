@@ -2,9 +2,9 @@
 
 {% block content %}
 <p>
-<b>Original URL:</b> {{ url.long_url }}<br/>
+<b>Original URL:</b> <a href={{ url.long_url }}>{{ url.long_url }}</a><br/>
     <br/>
-<b>Short URL:</b> {{ url.short }}<br/>
+<b>Short URL:</b> <a href={{ url.long_url }}>{{ url.short }}</a><br/>
     <br/>
 <b>Clicks count:</b> {{ url.clicks_count }}<br/>
     <br/>

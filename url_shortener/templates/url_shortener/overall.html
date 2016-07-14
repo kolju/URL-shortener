@@ -1,22 +1,12 @@
-{#{% block content %}#}
-{#<h2>URL's list:</h2>#}
-{#{% if objects_list %}#}
-{#    <ul>#}
-{#    {% for obj in objects_list %}#}
-{#        <li><a href={{ obj.long_url }}>{{ obj.short }}</a> : {{ obj.clicks_count }} <a href="{% url 'delete_obj' link_id=obj.id%}">Delete</a></li>#}
-{#    {% endfor %}#}
-{#    </ul>#}
-{#{% else %}#}
-{#    <p>No URLs are available.</p>#}
-{#{% endif %}#}
-{#{% endblock content %}#}
-
 {% block content %}
 <h2>URL's list:</h2>
 {% for link in links %}
-    {# Each "link" is a Link model object. #}
-{#    {{ link.long_url }}<br />#}
-     <li><a href={{ link.long_url }}>{{ link.short }}</a> : {{ link.clicks_count }}</li>
+    <li><a href={{ link.long_url }}>{{ link.short }}</a> : {{ link.clicks_count }}
+    <form name="delete_form" action="{% url 'delete_obj' link_id=link.id%}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Delete" />
+  </form></li>
 {% endfor %}
 
 <div class="pagination">
