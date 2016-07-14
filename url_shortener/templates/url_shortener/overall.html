@@ -1,26 +1,31 @@
 {% block content %}
-<h2>URL's list:</h2>
-{% for link in links %}
-    <li><a href={{ link.short_url }}>{{ link.short_url }}</a> : {{ link.clicks_count }}
-    <form name="delete_form" action="{% url 'delete_obj' link_id=link.id%}" method="post">
-    {% csrf_token %}
-    <input type="submit" value="Delete" />
-  </form></li>
-{% endfor %}
+    <h2>URL's list:</h2>
+    <ul>
+        {% for link in links %}
+            <li>
+                <a href={{ link.short_url }}>{{ link.short_url }}</a> : {{ link.clicks_count }}
 
-<div class="pagination">
-    <span class="step-links">
-        {% if links.has_previous %}
-            <a href="?page={{ links.previous_page_number }}">previous</a>
-        {% endif %}
+                <form action="{% url 'url_shortener:delete_obj' link_id=link.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete"/>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
 
-        <span class="current">
-            Page {{ links.number }} of {{ links.paginator.num_pages }}.
+    <div class="pagination">
+        <span class="step-links">
+            {% if links.has_previous %}
+                <a href="?page={{ links.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ links.number }} of {{ links.paginator.num_pages }}.
+            </span>
+
+            {% if links.has_next %}
+                <a href="?page={{ links.next_page_number }}">next</a>
+            {% endif %}
         </span>
-
-        {% if links.has_next %}
-            <a href="?page={{ links.next_page_number }}">next</a>
-        {% endif %}
-    </span>
-</div>
+    </div>
 {% endblock content %}

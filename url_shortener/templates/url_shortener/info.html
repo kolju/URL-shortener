@@ -1,13 +1,13 @@
 {% block title %}<h2>URL info:</h2>{% endblock %}
 
 {% block content %}
-<p>
-<b>Original URL:</b> <a href={{ link.long_url }}>{{ link.long_url }}</a><br/>
-    <br/>
-<b>Short URL:</b> <a href={{ link.short_url }}>{{ link.short_url }}</a><br/>
-    <br/>
-<b>Clicks count:</b> {{ link.clicks_count }}<br/>
-    <br/>
-<b>Submitted on:</b> {{ link.created|date:"M d, Y" }}
-</p>
+    <p>
+        <b>Original URL:</b> <a href={{ link.long_url }}>{{ link.long_url }}</a><br/>
+        <br/>
+        <b>Short URL:</b> <a href={{ link.short_url }}>{{ link.short_url }}</a><br/>
+        <br/>
+        <b>Clicks count:</b> {{ link.clicks_count }}<br/>
+        <br/>
+        <b>Submitted on:</b> {{ link.created|date:"r" }}
+    </p>
 {% endblock %}

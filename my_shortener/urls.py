@@ -18,6 +18,6 @@ from django.contrib import admin
 
 
 urlpatterns = [
-    url(r'^shortener/', include('url_shortener.urls')),
+    url(r'^shortener/', include('url_shortener.urls', namespace='url_shortener')),
     url(r'^admin/', admin.site.urls),
 ]
