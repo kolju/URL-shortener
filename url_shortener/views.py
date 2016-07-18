@@ -7,6 +7,9 @@ from .models import Link
 
 
 def index(request):
+    """
+    Main page with input form and top 20 URLs sorted by clicks count and created date
+    """
     if request.method == 'POST':
         form = LinkShortenerForm(request.POST)
         if form.is_valid():
@@ -22,12 +25,18 @@ def index(request):
 
 
 def info(request, link_id):
+    """
+    URL's information
+    """
     link = get_object_or_404(Link, id=link_id)
 
     return render(request, 'url_shortener/info.html', {'link': link})
 
 
 def url_redirect(request, short_url):
+    """
+    Redirect from short URL to original
+    """
     link = get_object_or_404(Link, short_url=short_url)
     link.clicks_count = F('clicks_count') + 1
     link.save()
@@ -36,6 +45,9 @@ def url_redirect(request, short_url):
 
 
 def delete_obj(request, link_id):
+    """
+    Delete some link from DB
+    """
     if request.method == 'POST':
         Link.objects.filter(id=link_id).delete()
 
@@ -43,6 +55,9 @@ def delete_obj(request, link_id):
 
 
 def overall(request):
+    """
+    Page with all URL's information sorted by clicks count and created date
+    """
     link_list = Link.objects.all().order_by('-clicks_count', '-created')
     paginator = Paginator(link_list, 10)
 

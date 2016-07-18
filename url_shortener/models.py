@@ -9,6 +9,7 @@ class Link(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     clicks_count = models.PositiveIntegerField(default=0)
 
+
     class Meta:
         index_together = [
             ["clicks_count", "created"],
@@ -32,3 +33,4 @@ class Link(models.Model):
 
     def __str__(self):
         return self.short_url
+
