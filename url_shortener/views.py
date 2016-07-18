@@ -21,7 +21,12 @@ def index(request):
 
     top_links = Link.objects.all().order_by('-clicks_count', '-created')[:20]
 
-    return render(request, 'url_shortener/index.html', {'form': form, 'top_links': top_links})
+    context = {
+        'form': form,
+        'top_links': top_links,
+    }
+
+    return render(request, 'url_shortener/index.html', context)
 
 
 def info(request, link_id):
@@ -30,7 +35,11 @@ def info(request, link_id):
     """
     link = get_object_or_404(Link, id=link_id)
 
-    return render(request, 'url_shortener/info.html', {'link': link})
+    context = {
+        'link': link,
+    }
+
+    return render(request, 'url_shortener/info.html', context)
 
 
 def url_redirect(request, short_url):
@@ -67,4 +76,8 @@ def overall(request):
     except (PageNotAnInteger, EmptyPage):
         raise Http404()
 
-    return render(request, 'url_shortener/overall.html', {'links': links})
+    context = {
+        'links': links,
+    }
+
+    return render(request, 'url_shortener/overall.html', context)
