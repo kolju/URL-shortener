@@ -29,3 +29,6 @@ class Link(models.Model):
                 pass
             else:
                 break
+
+    def __str__(self):
+        return self.short_url
