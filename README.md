@@ -1,15 +1,15 @@
 URL Shortener
 
 Main page:
-- link shortener form
-- top 20 links, sorted by popularity, then by "freshness"
+- URL shortener form
+- top 20 URLs, sorted by popularity, then by "freshness"
 
-Links list page:
+URLs list page:
 - pagination
 - sorting by popularity, then by "freshness"
-- "delete" button for every link object
+- "delete" button for every URL object
 - short to original redirect
 
-Link info page (shows after short link creation):
+URL info page (shows after short URL creation):
 - date of cration
-- number of referrals by link
+- number of referrals by URL
